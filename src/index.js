@@ -7,6 +7,7 @@ const models = require("../models");
 const getUser = (token) => {
   try {
     if (token) {
+      console.log("token", token);
       return jwt.verify(token, "jwtsecret");
     }
     return null;

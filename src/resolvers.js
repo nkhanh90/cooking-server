@@ -3,6 +3,14 @@ const jwt = require("jsonwebtoken");
 
 const resolvers = {
   Query: {
+    async userMe(root, args, { user }) {
+      try {
+        if (!user) throw new Error("You are not authenticated!");
+        return user;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
     async user(root, { id }, { models }) {
       return models.User.findByPk(id, { raw: true });
     },
@@ -17,7 +25,7 @@ const resolvers = {
     async recipe(root, { id }, { models, user }) {
       try {
         if (!user) throw new Error("You are not authenticated!");
-        return models.Recipe.findByPk(id, { raw: true });
+        return models.Recipe.findByPk(id);
       } catch (error) {
         throw new Error(error.message);
       }

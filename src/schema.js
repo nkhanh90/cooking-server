@@ -16,7 +16,8 @@ const typeDefs = gql`
     title: String!
     direction: String!
     user: User!
-    ingredients: [Ingredient]
+    ingredients: [Ingredient]!
+    createdAt: String!
   }
   type Ingredient {
     id: Int!
@@ -24,6 +25,7 @@ const typeDefs = gql`
     ammount: String!
   }
   type Query {
+    userMe: User
     user(id: Int!): User
     allRecipes: [Recipe!]!
     recipe(id: Int!): Recipe
